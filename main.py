@@ -7,8 +7,9 @@ with open('sample-data.json', 'r') as file:
 # Extract innings data
 innings = match_data.get('innings', [])
 
-# Create a dictionary to store total runs for each batter
+# Create dictionaries to store total runs and balls faced for each batter
 batter_runs = {}
+batter_balls_faced = {}
 
 # Iterate through innings
 for inning in innings:
@@ -17,16 +18,15 @@ for inning in innings:
             batter = delivery['batter']
             runs = delivery['runs']['batter']
 
-            # Update the runs for the batter
+            # Update the runs and balls faced for the batter
             batter_runs[batter] = batter_runs.get(batter, 0) + runs
+            batter_balls_faced[batter] = batter_balls_faced.get(batter, 0) + 1
 
 # Sort the batters by runs in descending order
 sorted_batters = sorted(batter_runs.items(), key=lambda x: x[1], reverse=True)
 
-# Get the top three batters
-top_three_batters = sorted_batters[:3]
-
-# Print the top three batters
-print("Top 3 Batters with Highest Scores:")
-for i, (batter, runs) in enumerate(top_three_batters):
-    print(f"{i + 1}. {batter}: {runs} runs")
+# Display the top batters with runs and balls faced
+print("Top Batters with Highest Scores and Balls Faced:")
+for i, (batter, runs) in enumerate(sorted_batters):
+    balls_faced = batter_balls_faced.get(batter, 0)
+    print(f"{i + 1}. {batter} - {runs} runs ({balls_faced} balls)")
