@@ -30,3 +30,6 @@ print("Top Batters with Highest Scores and Balls Faced:")
 for i, (batter, runs) in enumerate(sorted_batters):
     balls_faced = batter_balls_faced.get(batter, 0)
     print(f"{i + 1}. {batter} - {runs} runs ({balls_faced} balls)")
+
+
+#rest of this code will be updated soon
